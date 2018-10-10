@@ -86,7 +86,7 @@ starttime = datetime.datetime.now()
 sourceDir = os.getcwd()
 try:
 	if len(sys.argv) < 2:
-		print 'Need at lease one parameter: image name.'
+		print ('Need at lease one parameter: image name.')
 	else:
 		imageName = sys.argv[1]
 
@@ -101,13 +101,13 @@ try:
 					img.save(imageShortName+'.png')
 					createIcons(imageShortName, sourceDir)
 				else:
-					print 'Only support png or jpg format'
+					print ('Only support png or jpg format')
 		else:
-			print 'File not found: '+imageName
+			print ('File not found: '+imageName)
 		
-except Exception, e:
-	print "Error found:", e, Exception
+except Exception as e:
+	print ("Error found:", e, Exception)
 
 
 endtime = datetime.datetime.now()
-print 'spend time: ', (endtime-starttime)
+print ('spend time: ', (endtime-starttime))
