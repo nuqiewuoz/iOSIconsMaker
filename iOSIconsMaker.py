@@ -13,101 +13,97 @@ import datetime
 
 IMAGE_TYPE = '.png'
 DEFAULT_FOLDER = 'AppIcon'
-IOS7_FOLDER = 'iOS7+'
-IOS6_FOLDER = 'iOS6.1-'
+WATCH_FOLDER = 'iWatch'
 
 
-def resizeOneImage(imageShortName, size):
-	# the file name is imageShortName + '.png'
-	img = Image.open(imageShortName+IMAGE_TYPE)
-	(w,h) = img.size
-	(nw, nh) = (size, size)
-	outImg = img.resize((nw, nh), Image.ANTIALIAS)
-	newFile = imageShortName+'_'+str(size)+IMAGE_TYPE
-	outImg.save(newFile)
-	return newFile
+def resize_one_image(image_name, size):
+    # the file name is image_name + '.png'
+    img = Image.open(image_name + IMAGE_TYPE)
+    (w,h) = img.size
+    (nw, nh) = (size, size)
+    out_img = img.resize((nw, nh), Image.ANTIALIAS)
+    new_file = image_name + '_' + str(size) + IMAGE_TYPE
+    out_img.save(new_file)
+    return new_file
 
-def createIcons(imageShortName, sourceDir):
+
+def create_icons(image_name, sourceDir):
 	# create folder first
 	# put files to those folder
 	# curDate =  datetime.date.today()
 	# curTime = datetime.time()
-	iconFolder = sourceDir+os.sep+DEFAULT_FOLDER
-	if os.path.isdir(iconFolder):
-		shutil.rmtree(iconFolder)
+    icon_folder = sourceDir+os.sep+DEFAULT_FOLDER
+    if os.path.isdir(icon_folder):
+        shutil.rmtree(icon_folder)
 
-	os.mkdir(iconFolder)
-	os.mkdir(iconFolder+os.sep+IOS6_FOLDER)
-	os.mkdir(iconFolder+os.sep+IOS7_FOLDER)
-	imageName = imageShortName+IMAGE_TYPE
-	shutil.copy(imageName, iconFolder+os.sep+imageName)
-	os.chdir(iconFolder)
+    os.mkdir(icon_folder)
+    os.mkdir(icon_folder + os.sep + WATCH_FOLDER)
+    imageName = image_name+IMAGE_TYPE
+    shutil.copy(imageName, icon_folder+os.sep+imageName)
+    os.chdir(icon_folder)
 
-	image29 = resizeOneImage(imageShortName, 29)
-	image40 = resizeOneImage(imageShortName, 40)
-	image50 = resizeOneImage(imageShortName, 50)
-	image57 = resizeOneImage(imageShortName, 57)
-	image58 = resizeOneImage(imageShortName, 58)
-	image60 = resizeOneImage(imageShortName, 60)
-	image72 = resizeOneImage(imageShortName, 72)
-	image76 = resizeOneImage(imageShortName, 76)
-	image80 = resizeOneImage(imageShortName, 80)
-	image87 = resizeOneImage(imageShortName, 87)
-	image114 = resizeOneImage(imageShortName, 114)
-	image120 = resizeOneImage(imageShortName, 120)
-	image144 = resizeOneImage(imageShortName, 144)
-	image152 = resizeOneImage(imageShortName, 152)
-	image180 = resizeOneImage(imageShortName, 180)
-	image512 = resizeOneImage(imageShortName, 512)
-	image1024 = resizeOneImage(imageShortName, 1024)
-	imageItunes = 'iTunesArtwork'+IMAGE_TYPE
-	imageItunes2x = 'iTunesArtwork@2x'+IMAGE_TYPE
+    image29 = resize_one_image(image_name, 29)
+    image40 = resize_one_image(image_name, 40)
+    image48 = resize_one_image(image_name, 48)
+    image50 = resize_one_image(image_name, 50)
+    image55 = resize_one_image(image_name, 50)
+    image57 = resize_one_image(image_name, 57)
+    image58 = resize_one_image(image_name, 58)
+    image60 = resize_one_image(image_name, 60)
+    image72 = resize_one_image(image_name, 72)
+    image76 = resize_one_image(image_name, 76)
+    image80 = resize_one_image(image_name, 80)
+    image87 = resize_one_image(image_name, 87)
+    image100 = resize_one_image(image_name, 100)
+    image114 = resize_one_image(image_name, 114)
+    image120 = resize_one_image(image_name, 120)
+    image144 = resize_one_image(image_name, 144)
+    image152 = resize_one_image(image_name, 152)
+    image167 = resize_one_image(image_name, 167)
+    image172 = resize_one_image(image_name, 172)
+    image180 = resize_one_image(image_name, 180)
+    image196 = resize_one_image(image_name, 196)
+    image216 = resize_one_image(image_name, 216)
+    image512 = resize_one_image(image_name, 512)
+    image1024 = resize_one_image(image_name, 1024)
 
-	os.rename(image512, imageItunes)
-	os.rename(image1024, imageItunes2x)
+    watchImages = [image48, image55, image58, image80, image100, image172, image196, image216, image1024]
+    for imgName in watchImages:
+        shutil.copy(imgName, icon_folder+os.sep+WATCH_FOLDER+os.sep+imgName)
+    # # remove temp files
+    # file_list = os.listdir(icon_folder)
+    # for name in file_list:
+    #     full_name = icon_folder + os.sep + name
+    #     if  os.path.isfile(full_name):
+    #         os.remove(full_name)
 
-	ios7Images = [image87, image180, image120, image60, image152, image76, image80, image40, image58, image29, imageItunes, imageItunes2x]
-	ios6Images = [image57, image114, image72, image29, image50, image58, image144, imageItunes, imageItunes2x]
 
-	for imgName in ios7Images:
-		shutil.copy(imgName, iconFolder+os.sep+IOS7_FOLDER+os.sep+imgName)
-
-	for imgName in ios6Images:
-		shutil.copy(imgName, iconFolder+os.sep+IOS6_FOLDER+os.sep+imgName)
-
-	# remove temp files
-	fileList = os.listdir(iconFolder)
-	for name in fileList:
-		fullName = iconFolder+os.sep+name
-		if  os.path.isfile(fullName):
-			os.remove(fullName)
-
-starttime = datetime.datetime.now()
+start_time = datetime.datetime.now()
 sourceDir = os.getcwd()
 try:
-	if len(sys.argv) < 2:
-		print ('Need at lease one parameter: image name.')
-	else:
-		imageName = sys.argv[1]
+    if len(sys.argv) < 2:
+        print ('Need at lease one parameter: image name.')
+    else:
+        imageName = sys.argv[1]
 
-		fullName = sourceDir + os.sep + imageName
-		if  os.path.isfile(fullName):
-				imageShortName = imageName[0:len(imageName)-len(IMAGE_TYPE)]
-				if imageName.endswith(IMAGE_TYPE):
-					createIcons(imageShortName, sourceDir)
-				elif imageName.endswith('.jpg'):
-					#need to convert it to png
-					img = Image.open(imageName)
-					img.save(imageShortName+'.png')
-					createIcons(imageShortName, sourceDir)
-				else:
-					print ('Only support png or jpg format')
-		else:
-			print ('File not found: '+imageName)
+        full_name = sourceDir + os.sep + imageName
+        if os.path.isfile(full_name):
+            image_name = imageName[0:len(imageName)-len(IMAGE_TYPE)]
+            if imageName.endswith(IMAGE_TYPE):
+                create_icons(image_name, sourceDir)
+            elif imageName.endswith('.jpg'):
+                #need to convert it to png
+                img = Image.open(imageName)
+                img.save(image_name+'.png')
+                create_icons(image_name, sourceDir)
+            else:
+                print ('Only support png or jpg format')
+        else:
+            print ('File not found: '+imageName)
 		
 except Exception as e:
 	print ("Error found:", e, Exception)
 
 
-endtime = datetime.datetime.now()
-print ('spend time: ', (endtime-starttime))
+end_time = datetime.datetime.now()
+print ('spend time: ', (end_time - start_time))
