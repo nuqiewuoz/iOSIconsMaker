@@ -46,7 +46,7 @@ def create_icons(image_name, sourceDir):
     image40 = resize_one_image(image_name, 40)
     image48 = resize_one_image(image_name, 48)
     image50 = resize_one_image(image_name, 50)
-    image55 = resize_one_image(image_name, 50)
+    image55 = resize_one_image(image_name, 55)
     image57 = resize_one_image(image_name, 57)
     image58 = resize_one_image(image_name, 58)
     image60 = resize_one_image(image_name, 60)
@@ -54,6 +54,7 @@ def create_icons(image_name, sourceDir):
     image76 = resize_one_image(image_name, 76)
     image80 = resize_one_image(image_name, 80)
     image87 = resize_one_image(image_name, 87)
+    image88 = resize_one_image(image_name, 88)
     image100 = resize_one_image(image_name, 100)
     image114 = resize_one_image(image_name, 114)
     image120 = resize_one_image(image_name, 120)
@@ -67,7 +68,7 @@ def create_icons(image_name, sourceDir):
     image512 = resize_one_image(image_name, 512)
     image1024 = resize_one_image(image_name, 1024)
 
-    watchImages = [image48, image55, image58, image80, image100, image172, image196, image216, image1024]
+    watchImages = [image48, image55, image58, image80, image87, image88, image100, image172, image196, image216, image1024]
     for imgName in watchImages:
         shutil.copy(imgName, icon_folder+os.sep+WATCH_FOLDER+os.sep+imgName)
     # # remove temp files
